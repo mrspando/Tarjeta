@@ -188,20 +188,23 @@
     outline-offset:2px;
   }
   .copy-btn{
-    font-family:'Open Sans', sans-serif;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    background:var(--plate-2);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:28px;
+    height:28px;
+    padding:0;
+    background:transparent;
     color:var(--ink-soft);
-    border:1px solid var(--line);
-    border-radius:3px;
-    padding:5px 8px;
+    border:none;
+    border-radius:4px;
     cursor:pointer;
     flex-shrink:0;
+    transition:color .15s ease, background .15s ease;
   }
-  .copy-btn:hover{ color:var(--ink); }
+  .copy-btn svg{ width:15px; height:15px; display:block; }
+  .copy-btn:hover{ color:var(--ink); background:var(--plate-2); }
+  .copy-btn.copied{ color:var(--accent); }
 
   .actions{
     padding-top:18px;
@@ -297,7 +300,12 @@
             <span class="label">WeChat</span>
             <span style="display:flex;align-items:center;gap:8px;">
               <span class="value" id="wechat-id">wxid_5164e6h4402c12</span>
-              <button class="copy-btn" id="copy-wechat" type="button">Copiar</button>
+              <button class="copy-btn" id="copy-wechat" type="button" title="Copiar" aria-label="Copiar ID de WeChat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
             </span>
           </div>
         </div>
@@ -317,7 +325,7 @@
         <button class="qr-tab active" id="tab-page" type="button">Ver tarjeta</button>
         <button class="qr-tab" id="tab-vcard" type="button">Guardar contacto</button>
       </div>
-      <div class="qr-wrap"><img id="qrcode-page" src="data:image/png;base64,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" alt="Código QR de la tarjeta"><img id="qrcode-vcard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAegAAAHoCAIAAAANMutbAAANAklEQVR42u3dQY7sShEFUBrVNkDsf1UIdtHqlhgwTJVQPsUlIlznjP9zpdP2VQ5ux//6/fn+CwB7/NUWAAhuAAQ3AIIbQHADILgBENwAghsAwQ2A4AYQ3AAIbgAEN4DgBkBwA3DjdfsP/vb3f6y4sX//65/R+3p3/XfXSf/3XfuwRdX+V30v259L1fs57bvekldO3ADLCG4AwQ2A4AZAcAMIbgAENwCnV9WFqnqvt257munebtW+pfvd6eeY7sVveW+n9Y677rfrfd6eV07cAA8huAEENwCCGwDBDSC4ARDcAJxe6R+Y1i/uWmfV9buu0zUf/KlztKf1iKftc5cteeXEDbCM4AYQ3AAIbgAEN4DgBkBwA3B62YJa6V7z7e9u6Wun97/qvm6v37Wf6X70lr97cOIGQHADILgBBDcAghsAwQ0guAEY6uN63OneaNec4mk939vfnTbHfMt70vX+d83vxokbQHADILgBENwAghsAwQ2A4AZ4iHiPW3/zv6rmOFf9bpeq+9qyP1299ar9vJ3zXvX3BNN67k7cAAhuAMENgOAGQHADCG4ABDcAxcp63NP6wrfrrJovPO2/fye9nqr9Tz/fLZ76/nQ93y155cQN8BCCG0BwAyC4ARDcAIIbAMENwOm6x/3U+dpVvc4t+/PUOdTp/e+ao53uX3fdb9f6nbgBENwACG4AwQ2A4AZAcAMIbgCaXfe4p8077pov3LU/XT3iqnWmn/tT73daH7nr+Va9/13zu6v2zYkbYBnBDSC4ARDcAAhuAMENgOAG4PT1+/NdcqGqHmXXdaZdv8qWfmuVac+ra3+270PX3yt03ZcTN8DDCW4AwQ2A4AZAcAMIbgAENwCn15aFds3hTa/nnS1zvat6r1XXmdZTvt3naXOib/f53XWeel/pnHHiBngIwQ0guAEQ3AAIbgDBDYDgBuB03eNO94vTv1vVt73V1fvucrueab3g9PzornnT6fenKx/S+9/1/jhxAzyE4AYQ3AAIbgAEN4DgBkBwA3D6+v35vvoH03rct9L9364+71OvY527fnfaOqddvyonnbgBlhHcAIIbAMENgOAGENwACG4ATq+qC3X1Q6t6kVvmIE+bO9w1Z7nqOuk57137tmUO+LT3ZMt6nLgBlhHcAIIbAMENgOAGENwACG4ATtfzuKt0zaf+tPvq2reu+0r33Lv64Fu+i2lzrqf12c3jBvhQghtAcAMguAEQ3ACCGwDBDcDplf6Bqn7rO+ne8e31p/VJq66fnhte9bvpHm7Vet7tz7S54V3S++zEDYDgBkBwAwhuAAQ3AIIbQHAD0Ox6Hve0OcXvdPW7u/rOT52jXSXdi+/63Wn97ml/V5F+37r2zYkbYBnBDSC4ARDcAAhuAMENgOAG4BTvcd9e552nztWd1mvumife9f58Wr87bcv7k34u6ffHiRtgGcENILgBENwACG4AwQ2A4Abg9Jq2oK6+7ZZe+bT+9bTr315n2vNNf0dV79u093na76bX78QNsIzgBhDcAAhuAAQ3gOAGQHADcIrP4073QKv6y1WmzRHeMi+76vlOU7Vv0+aV+3uL3vU4cQMsI7gBBDcAghsAwQ0guAEQ3ACc4j3uKk/tR6dNm1vd1etPP/dp7/NT55in59E7cQMguAEQ3ACCGwDBDYDgBhDcAPyflPW439nSI07P/93ef58233laj37afOqu9VS9h9N0vc9O3AAPIbgBBDcAghsAwQ0guAEQ3ACc4vO4p/33Xfe1xbQedNXzSl+na51V+5l+H7Y8ly3rd+IGWEZwAwhuAAQ3AIIbQHADILgBOL1u/8G0XnN6fnSVrrnMt9fZ0qfu6vVPe16310n39Kuey7T549PmiTtxAywjuAEENwCCGwDBDSC4ARDcAJxeVRfq6ndP62un961Kug+b7u1uUbXP6e+oqze9/fvtykMnboBlBDeA4AZAcAMguAEENwCCG4DT1+/Pd8mFntrHTM9lvv3daX3nrvndT31e6X2Y9h5umafftf9O3AAPIbgBBDcAghsAwQ0guAEQ3ACc2uZxT5uzfNuvTPdGq9azpQ/+Ttd60j3oafvQNe97e5509ceduAGWEdwAghsAwQ2A4AYQ3AAIbgBO1/O403Nyt8xrvtW1/vQ86O3zl6fNfZ72fW1ZT9cc8671O3EDLCO4AQQ3AIIbAMENILgBENwAnOLzuN9JzynumiN8Oy94Wq85vT+317ndh/T7UPU+d/WOp/W109J/r2AeNwCCG0BwAyC4ARDcAIIbAMENwB8q63Fvn3Odvt+uHnFXn7drf7reh2n3NW1udfr96dr/rtxz4gZYRnADCG4ABDcAghtAcAMguAE4vdI/kJ5nnV7ntL72lrnb6d7rlveh635v19/1nW55H5y4ARDcAIIbAMENgOAGENwACG4Ail33uKf1W6v6p1X3W3X9rrnJW/rs096T9DrT6+l6vum54VW/O20+uBM3wDKCG0BwAyC4ARDcAIIbAMENwOnr9+f76h+k+55b+t23v5vujU7rKaf3oeu/T38X03rN6e8uvc6q5zjt7xKcuAGWEdwAghsAwQ2A4AYQ3AAIbgBOHzePe4uu+5rWj+7ah/Qc82nfy5aee/q9Tb8nVetx4gZYRnADCG4ABDcAghtAcAMguAE4vaou1NW7/LQ511Xrn9aT7erbVj33qu8lPde7a/+79q0rN9I54MQNsIzgBhDcAAhuAAQ3gOAGQHADcCrrcXf1ZNN95LSu3ndVv3XaHOctz/2p38X2+fhb/j8BTtwAywhuAMENgOAGQHADCG4ABDcAp+sed9f863S/sqt/2nW/0+Y1d83dTl8/PZf8qfPou67TNY/7dp+duAGWEdwAghsAwQ2A4AYQ3AAIbgBO1z3udO94S880vT9b+t1dzzfdX56mq99dNZ99ew5Mew+duAGWEdwAghsAwQ2A4AYQ3AAIbgBOZfO406p6lF0932m96dvea9fc7fT6b/vLXabNK696LtPWM+27c+IGeAjBDSC4ARDcAAhuAMENgOAG4BSfx53uUXatp+u+3rntw6bnO1f97q30HOdpuuZWd82/rrp++jrp78iJG2AZwQ0guAEQ3AAIbgDBDYDgBuD0Sv/Alh5o13rSvfJ0X7tqH7p65VXv7bT53V33m56D3/V+VuWAEzfAhxLcAIIbAMENgOAGENwACG4ATtc97ml91S195PR+TpuLPW1ue5WuueRd+zbtftO5Me07deIGeAjBDSC4ARDcAAhuAMENgOAG4FQ2jzvd/32nqme6vZe6fT1dqvahaj71tP1P950/7Tuqei5O3ADLCG4AwQ2A4AZAcAMIbgAENwCnr9+f75ILpXu7XfOLp831njZHeNo88S373DV3u2qd0353y7xvPW6ADyW4AQQ3AIIbAMENILgBENwAnOI97lvpfvTt+qfNTZ7W797+HLvWk9bVQ+96/6ftmx43AIIbQHADILgBENwAghsAwQ3A/3Dd454257qrr52ev3x7na51dt1X+n6rTJuv3cV74sQN8NEEN4DgBkBwAyC4AQQ3AIIbgNMr/QNdPdZ31++a8zutz5vupXb162+f75YedFrXdzHt/bx9T7r63U7cAMsIbgDBDYDgBkBwAwhuAAQ3AKeyHvdt37NrDnVVLzhtWm80/RzTz3fanPEt88273uf0/kzLGSdugIcT3ACCGwDBDYDgBhDcAAhuAE5fvz/fq29gS38zvc7t60k/X/v8Z+uZNqf7qW6/CydugGUEN4DgBkBwAyC4AQQ3AIIbgNP6HvetaXOuu+aS314/3dtN98Gr3octc7Gn9d+nfRfTvkc9boCHE9wAghsAwQ2A4AYQ3AAIbgBOr9t/sGUO77te5PZ50LfrnHadtC3r7/p7gq6+c9f9Vv1u13fkxA3wEIIbQHADILgBENwAghsAwQ3A6VV1IXOH/2yd6fnXXXONu96HLT3oae95+n2bNud9y3fkxA3wEIIbQHADILgBENwAghsAwQ3A6ZX+gaqeZld/tuq+pvWa362/a571tHnZXfdb1YPeMm+66nef+j44cQM8hOAGENwACG4ABDeA4AZAcANw+vr9+b76B13zdtM91rR0P3f7XPItv9v13n7a+7NlTrcTNwCCG0BwAyC4ARDcAIIbAMENwB962YL/mjZfe1q/NT2/u2qft+xP1frT/33Vc5w2r/x2nV1/p+LEDfAQghtAcAMguAEQ3ACCGwDBDcAp3uPeMve2qi+cvk56LvmWeetd15n2u2lV69/ydwlbnqMTN8AyghtAcAMguAEQ3ACCGwDBDcCprMed7mNuX2d6rnRXT7Zq/dN6tVW9+Gnzzbv2P/29TNuH9HN04gZYRnADCG4ABDcAghtAcAMguAE4ff3+fNsFACduAAQ3AIIbQHADILgBENwAghsAwQ2A4AYQ3AAIbgAEN4DgBkBwAyC4AZ7qP/oBIbaJNddPAAAAAElFTkSuQmCC" alt="Código QR para guardar el contacto" hidden></div>
+      <div class="qr-wrap"><img id="qrcode-page" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAAGMAQMAAADz9wcJAAAABlBMVEURERH////YdsArAAABpklEQVR42u2cWa7DIAxFUTfA/nfJDuiQ4AHyU+xKrXqiqnpFOT/oysPFvNLffVoBAQEB+TakyFOfK8cfjy95y79wK28/IP+MvDRWh5aGxmTx1Jt7gU0G2dGYaElDmQQu/wIaAwlqTASmgQuNgXwijlVX3aExkMR6zK5Tj4GkacxUX9cf+kqQmMYuDZAzXa5+CBoD2dBYG1VZVWlJDaY/KxoD2deYK7qOdbMoYiNXguznyua9C4lpvWvvSV8JEsuVWokVzZXn+vigMZBQX1m7TZG2EvONAJsMsu+PSaKUyKY+P7kSJBzHVGxTm9kn/59NBtnRmHyL229N/iOHkitBQjV/0ymL+Sh88mnRGMjembg1x6bD8XmRTQbZ8cfWn+4gqaExkASNqajEDTMD2NRjIDn+mPVdl2l/+kqQlLkLN8+z2BdoDCQ+P6YTPq3Mtj+5EiTlXlI3hpicJXW1yNAYSNY8v7oW9uolcQwk416SHUp0p0uFOAaSobHuJ8eaPwsgjoHE7yVVNV3t4CIaA0nrK0c7Odf8OvDDJoPE7iXxX2hAQEB+DLkDhQxmHnl74BoAAAAASUVORK5CYII=" alt="Código QR de la tarjeta"><img id="qrcode-vcard" src="data:image/png;base64,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" alt="Código QR para guardar el contacto" hidden></div>
       <p class="qr-caption" id="qr-caption">Escanea para abrir esta tarjeta</p>
       <button class="link-btn" id="show-front" type="button">&larr; Volver</button>
     </div>
@@ -353,11 +361,19 @@
 
     var copyBtn = document.getElementById('copy-wechat');
     if(copyBtn){
+      var copyIcon = copyBtn.innerHTML;
+      var checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
       copyBtn.addEventListener('click', function(){
         var text = document.getElementById('wechat-id').textContent;
         var done = function(){
-          copyBtn.textContent = 'Copiado';
-          setTimeout(function(){ copyBtn.textContent = 'Copiar'; }, 1500);
+          copyBtn.classList.add('copied');
+          copyBtn.innerHTML = checkIcon;
+          copyBtn.title = 'Copiado';
+          setTimeout(function(){
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = copyIcon;
+            copyBtn.title = 'Copiar';
+          }, 1500);
         };
         try{
           if(navigator.clipboard && navigator.clipboard.writeText){
